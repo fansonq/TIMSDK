@@ -373,8 +373,12 @@ public abstract class ChatManagerKit implements TIMMessageListener, MessageRevok
                     public void onError(int code, String desc) {
                         mIsLoading = false;
                         List<MessageInfo> msgInfos = new ArrayList<>();
-                        mCurrentProvider.addMessageList(msgInfos, true);
-                        callBack.onError(TAG, code, desc);
+                        if (mCurrentProvider != null){
+                            mCurrentProvider.addMessageList(msgInfos, true);
+                        }
+                        if (callBack!= null){
+                            callBack.onError(TAG, code, desc);
+                        }
                         TUIKitLog.e(TAG, "loadChatMessages() getMessage failed, code = " + code + ", desc = " + desc);
                     }
 
